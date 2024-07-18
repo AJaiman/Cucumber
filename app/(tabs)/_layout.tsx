@@ -17,16 +17,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Add',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'add-circle' : 'add-circle-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="rankings"
         options={{
-          title: 'Explore',
+          title: 'Rankings',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'podium' : 'podium-outline'} color={color} />
           ),
