@@ -10,8 +10,9 @@ export default function HomeScreen() {
       <ThemedText>Type of Game</ThemedText>
       <View style={styles.gameSelectView}>
         <Button isSelected={false} label='Singles' />
-        <Button isSelected={true} label='Doubles' />
+        <Button isSelected={true} style={{marginLeft: 20}} label='Doubles' />
       </View>
+      <ThemedText style={{marginTop: 10}}>Game Info</ThemedText>
     </View>
   );
 }
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'center',
-    marginLeft: 20
+    marginLeft: 30
   },
   gameSelectView: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    marginTop: 10
   }
 
 });

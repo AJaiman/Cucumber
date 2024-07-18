@@ -1,5 +1,5 @@
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Pressable } from "react-native";
+import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { ThemedText } from './ThemedText';
 import { FontAwesome } from '@expo/vector-icons';
@@ -7,12 +7,13 @@ import { FontAwesome } from '@expo/vector-icons';
 export type ButtonProps = {
     isSelected: boolean,
     label: string
+    style?: StyleProp<ViewStyle>
 }
 
 export default function Button(props: ButtonProps) {
     return (
         <Pressable>
-            <View style={props.isSelected ? styles.buttonPropsSelected : styles.buttonProps}>
+            <View style={[props.isSelected ? styles.buttonPropsSelected : styles.buttonProps, props.style]}>
                 {props.label === 'Doubles' ?
                 <FontAwesome5 style={{marginRight: 10}} name="user-friends" size={24} color={props.isSelected ? "black" : "#AADB1E"} /> :
                 <FontAwesome style={{marginRight: 10}} name="user" size={24} color={props.isSelected ? "black" : "#AADB1E"} />
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'row',
-        width: 150,
+        width: 160,
         padding: 10,
         borderWidth: 2,
         borderColor: '#AADB1E',
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'row',
-        width: 150,
+        width: 160,
         padding: 10,
         borderWidth: 2,
         borderColor: '#AADB1E',
