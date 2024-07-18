@@ -1,5 +1,5 @@
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
+import { GestureResponderEvent, Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { ThemedText } from './ThemedText';
 import { FontAwesome } from '@expo/vector-icons';
@@ -8,11 +8,12 @@ export type ButtonProps = {
     isSelected: boolean,
     label: string
     style?: StyleProp<ViewStyle>
+    onPress?: ((event: GestureResponderEvent) => void) | null | undefined
 }
 
 export default function Button(props: ButtonProps) {
     return (
-        <Pressable>
+        <Pressable onPress={props.onPress}>
             <View style={[props.isSelected ? styles.buttonPropsSelected : styles.buttonProps, props.style]}>
                 {props.label === 'Doubles' ?
                 <FontAwesome5 style={{marginRight: 10}} name="user-friends" size={24} color={props.isSelected ? "black" : "#AADB1E"} /> :
