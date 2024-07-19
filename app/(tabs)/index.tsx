@@ -45,6 +45,28 @@ function PlayerCard(props: PlayerCardProps) {
   return null
 }
 
+type ScoreInputProps = {
+  color: string
+}
+
+function ScoreInput(props: ScoreInputProps) {
+
+  const [score, onScoreChange] = useState('')
+
+  return (
+    <GestureHandlerRootView>
+      <TextInput 
+          style={[styles.scoreInput, {backgroundColor: 'rgba(' + props.color + ', 0.5)', borderColor: 'rgba(' + props.color + ', 1)'}]}
+          placeholder={'Score'}
+          onChangeText={onScoreChange}
+          value={score}
+          textAlign='center'
+          keyboardType='number-pad'
+        />
+    </GestureHandlerRootView>
+  )
+}
+
 export default function HomeScreen() {
 
   const [isSingles, setIsSingles] = useState(true);
@@ -69,6 +91,10 @@ export default function HomeScreen() {
         <Button isSelected={!isSingles} onPress={onPressDoubles} style={{marginLeft: 20}} label='Doubles' />
       </View>
       <ThemedText style={{marginTop: 10}}>Game Info</ThemedText>
+      <View style={{display: 'flex', flexDirection:'row', marginLeft: 20, marginVertical: 10}}>
+        <ScoreInput color='255, 45, 45'/>
+        <ScoreInput color='27, 148, 213'/>
+      </View>
       <Court>
         {
           isSingles ? 
@@ -117,6 +143,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderWidth: 3,
     borderRadius: 5,
-    }
+  },
+  scoreInput: {
+    borderWidth: 3,
+    height: 50,
+    width: 140,
+    fontSize: 20,
+    color: 'white',
+    borderRadius: 10,
+  }
 
 });
