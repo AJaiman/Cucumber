@@ -2,29 +2,43 @@ import Button from '@/components/Button';
 import Court from '@/components/Court';
 import { ThemedText } from '@/components/ThemedText';
 import { useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, ViewStyle, StyleProp } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 type PlayerCardProps = {
   color: string
   playerNumber: string
+  style?: StyleProp<ViewStyle>
 }
 
 function PlayerCard(props: PlayerCardProps) {
 
   const [player, onChangePlayer] = useState('')
 
-  if (props.color === 'rgba(255, 45, 45, 1') {
+  if (props.color === 'rgba(255, 45, 45, 1)') {
     return (
-      <GestureHandlerRootView style={styles.test}>
-        <FontAwesome style={{marginRight: 10}} name="user" size={24} color='black' />
+      <GestureHandlerRootView style={[styles.playerCardContainer, props.style, {backgroundColor: props.color, borderColor: props.color}]}>
+        <FontAwesome name="user" size={24} color='black' style={{margin: 8}} />
         <TextInput 
           style={styles.playerInput}
           placeholder={'Player ' + props.playerNumber}
           onChangeText={onChangePlayer}
           value={player}
         />
+      </GestureHandlerRootView>
+    )
+  }
+  else {
+    return (
+      <GestureHandlerRootView style={[styles.playerCardContainer, props.style, {backgroundColor: props.color, borderColor: props.color}]}>
+        <TextInput 
+          style={styles.playerInput}
+          placeholder={'Player ' + props.playerNumber}
+          onChangeText={onChangePlayer}
+          value={player}
+        />
+        <FontAwesome name="user" size={24} color='black' style={{margin: 8}} />
       </GestureHandlerRootView>
     )
   }
@@ -56,7 +70,19 @@ export default function HomeScreen() {
       </View>
       <ThemedText style={{marginTop: 10}}>Game Info</ThemedText>
       <Court>
-        <PlayerCard playerNumber='1' color='rgba(255, 45, 45, 1'/>
+        {
+          isSingles ? 
+        (<>
+        <PlayerCard playerNumber='1' color='rgba(255, 45, 45, 1)' style={{top: 75, left: 15}}/>
+        <PlayerCard playerNumber='1' color='rgba(27, 148, 213, 1)' style={{top: 75, right: 30}}/>
+        </>) :
+        (<>
+          <PlayerCard playerNumber='1' color='rgba(255, 45, 45, 1)' style={{top: 30, left: 15}}/>
+          <PlayerCard playerNumber='2' color='rgba(255, 45, 45, 1)' style={{top: 120, left: 15}}/>
+          <PlayerCard playerNumber='1' color='rgba(27, 148, 213, 1)' style={{top: 30, right: 30}}/>
+          <PlayerCard playerNumber='2' color='rgba(27, 148, 213, 1)' style={{top: 120, right: 30}}/>
+          </>)
+        }
       </ Court>
     </View>
   );
@@ -76,22 +102,21 @@ const styles = StyleSheet.create({
   playerInput: {
     backgroundColor: 'black',
     height: 40,
-    margin: 12,
+    width: 100,
     borderWidth: 1,
     padding: 10,
-    color: 'white'
+    color: 'white',
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
   },
-  test: {
+  playerCardContainer: {
     display: 'flex',
-    width: 150,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top:10,
     borderWidth: 3,
-    borderColor: 'red',
-    borderRadius: 20
+    borderRadius: 5,
     }
 
 });
